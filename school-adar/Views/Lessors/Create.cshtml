@@ -4,15 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Lessors", FormMethod.Post, new { @class = "center" , style="margin-top:2rem"}))
 {
+    <h2>Continue setting up your account..</h2>
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Lessor</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -56,8 +55,8 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-label mt-4 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>

@@ -154,6 +154,7 @@ namespace school_adar.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 ViewBag.UserType = model.AccountType.ToString();
+                Console.WriteLine(ViewBag.UserType);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -164,12 +165,13 @@ namespace school_adar.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                if (ViewBag.UserType == "Lessor")
-                        {
-                            return RedirectToAction("Create", "Lessors");
-                        }
+                    if (ViewBag.UserType == "Lessor")
+                    {
+                        return RedirectToAction("Create", "Lessors");
                     }
+
                     return RedirectToAction("Create", "Lessees");
+                }
                 AddErrors(result);
             }
 

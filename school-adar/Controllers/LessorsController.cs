@@ -52,7 +52,7 @@ namespace school_adar.Controllers
             {
                 db.Lessor.Add(lessor);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("/Housing/Index");
             }
 
             return View(lessor);

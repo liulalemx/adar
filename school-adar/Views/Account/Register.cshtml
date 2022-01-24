@@ -3,7 +3,7 @@
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal center", role = "form", style="margin-top:4rem" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
@@ -31,9 +31,9 @@
     @Html.LabelFor(m => m.AccountType, new { @class = "form-label mt-4" })
         <div class="col-md-offset-2 col-md-5">
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="AccountType" id="Lessor" autocomplete="off" checked="">
+                <input type="radio" class="btn-check" name="AccountType" id="Lessor" autocomplete="off" checked="" value="Lessor">
                 <label class="btn btn-outline-success" for="Lessor">Lessor</label>
-                <input type="radio" class="btn-check" name="AccountType" id="Lessee" autocomplete="off" checked="">
+                <input type="radio" class="btn-check" name="AccountType" id="Lessee" autocomplete="off" checked="" value="Lessee">
                 <label class="btn btn-outline-success" for="Lessee">Lessee</label>
                 @*@Html.LabelFor(m => m.Lessor, new { @class = "col-md-2 control-label" })
                 @Html.RadioButtonFor(m => m.AccountType, "Lessor", new { @class = "form-check-input" })
