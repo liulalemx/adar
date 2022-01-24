@@ -17,7 +17,7 @@
         string contentType = "image/jpeg";
         ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
 
-        <div class="card padding-bottom:0rem;} gallery_item " style="color:#000000; ">
+        <div class="card gallery_item animate__animated animate__backInDown" style="color:#000000; ">
             <h3 class="card-header text-center">@item.FirstName</h3>
             <div class="card-body gallery_item text-center" style="background-color:aliceblue;padding:0rem 1rem;">
                 <h5 class="card-title">@item.LastName</h5>
