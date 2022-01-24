@@ -3,8 +3,6 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
-
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -12,26 +10,42 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Email, new { @class = "form-label mt-4" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Password, new { @class = "form-label mt-4" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label mt-4" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+    @Html.LabelFor(m => m.AccountType, new { @class = "form-label mt-4" })
+        <div class="col-md-offset-2 col-md-5">
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="AccountType" id="Lessor" autocomplete="off" checked="">
+                <label class="btn btn-outline-success" for="Lessor">Lessor</label>
+                <input type="radio" class="btn-check" name="AccountType" id="Lessee" autocomplete="off" checked="">
+                <label class="btn btn-outline-success" for="Lessee">Lessee</label>
+                @*@Html.LabelFor(m => m.Lessor, new { @class = "col-md-2 control-label" })
+                @Html.RadioButtonFor(m => m.AccountType, "Lessor", new { @class = "form-check-input" })
+                @Html.LabelFor(m => m.Lessee, new { @class = "col-md-2 control-label" })
+                @Html.RadioButtonFor(m => m.AccountType, "Lessee", new { @class = "form-check-input" })*@
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-label mt-4 col-md-10">
+            <input type="submit" class="btn btn-success" value="Register" />
         </div>
     </div>
 }

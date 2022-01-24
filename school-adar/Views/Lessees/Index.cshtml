@@ -1,0 +1,37 @@
+﻿@model IEnumerable<school_adar.Models.Lessee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lessees</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="gallery">
+    @foreach (var item in Model)
+    {
+        byte[] image = item.Image;
+        string contentType = "image/jpeg";
+        ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
+
+        <div class="card padding-bottom:0rem;} gallery_item " style="color:#000000; ">
+            <h3 class="card-header text-center">@item.FirstName</h3>
+            <div class="card-body gallery_item text-center" style="background-color:aliceblue;padding:0rem 1rem;">
+                <h5 class="card-title">@item.LastName</h5>
+                <h6 class="card-subtitle text-muted">@item.PhoneNo</h6>
+                <img src=@ViewBag.imageSrc alt="Alternate Text" width="100" height="100" />
+                <hr />
+                <p class="card-text">@item.Adress.</p>
+                <ul class="navbar-nav me-auto" style="justify-content:flex-end; width:100%; padding: 0.5rem">
+                    <li class="nav-item" style="margin:0.5rem"> @Html.ActionLink("Edit", "Edit", new { id = item.ID, @class = "btn btn-outline-success" })</li>
+                    <li class="nav-item" style="margin:0.5rem">@Html.ActionLink("Details", "Details", new { id = item.ID, @class = "btn btn-success" })</li>
+                    <li class="nav-item" style="margin:0.5rem">@Html.ActionLink("Edit", "Edit", new { id = item.ID, @class = "btn btn-danger" })</li>
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+@*@item.ID*@

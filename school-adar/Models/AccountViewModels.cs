@@ -79,6 +79,12 @@ namespace school_adar.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name ="Account Type")]
+        public string AccountType { get; set; }
+        public string Lessor { get; set; }
+        public string Lessee { get; set; }
     }
 
     public class ResetPasswordViewModel

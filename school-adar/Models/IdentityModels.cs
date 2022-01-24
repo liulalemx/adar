@@ -25,6 +25,13 @@ namespace school_adar.Models
         {
         }
 
+        public DbSet<Housing> Housings { get; set; }
+        public DbSet<Lessee> Lessee { get; set; }
+        public DbSet<Lessor> Lessor { get; set; }
+        public DbSet<Request> Request { get; set; }
+        public DbSet<Review> Review { get; set; }
+
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
