@@ -128,5 +128,19 @@ namespace school_adar.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult LessorHouses(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<Housing> housing = db.Housings.Where(temp=>temp.LessorID == id).ToList();
+            if (housing == null)
+            {
+                return HttpNotFound();
+            }
+            return View(housing);
+        }
     }
 }
