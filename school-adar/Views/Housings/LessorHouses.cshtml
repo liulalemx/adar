@@ -4,66 +4,64 @@
     ViewBag.Title = "LessorHouses";
 }
 
-<h2>LessorHouses</h2>
+<style>
+    .homeCard {
+        min-height: 30vh;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-radius: 1rem;
+        cursor: pointer;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .img {
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+    }
+
+    .homeList {
+        padding: 0rem 5rem;
+    }
+
+    .h2 {
+        padding: 3rem 0rem;
+    }
+
+    .home {
+        min-height: 80vh;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-column-gap: 3rem;
+        grid-row-gap: 5rem;
+    }
+</style>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Housings", new { @class = "btn btn-success", style = "margin-left:5rem" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Lessor.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Features)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Condition)
-        </th>
-        <th></th>
-    </tr>
+<div class="homeList" style="overflow-x:hidden">
+    <h2 class="h2">Your Accomodations</h2>
+    <div class="home">
+        @foreach (var item in Model)
+        {
+            byte[] image = item.Image;
+            string contentType = "image/jpeg";
+            ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lessor.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Features)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Condition)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+            <div class="homeCard animate__animated animate__backInUp">
+                <a href="~/Housings/Details/@item.ID">
+                    <h3>@item.Location</h3>
+                    <p>@item.Price $</p>
+                    <img class="img" src=@ViewBag.imageSrc alt="House Image" />
+                </a>
+            </div>
+        }
+    </div>
 
-</table>
+</div>
+
+
+ @*return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
+@Html.ActionLink("Edit", "Edit", new { id = item.ID, @class = "btn btn-outline-success" })*@

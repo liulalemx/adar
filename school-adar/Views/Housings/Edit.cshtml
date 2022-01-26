@@ -4,26 +4,23 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Housings", FormMethod.Post, new { @class = "center" , enctype = "multipart/form-data", style="margin-top:5rem"}))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Housing</h4>
+        <h4>Edit Accomodation</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.LessorID, "LessorID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("LessorID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LessorID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,11 +47,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-            </div>
+            <label for="ImageFile" class="form-label mt-4">Select a new Image for the Accomodation</label>
+            <input class="form-control" name="ImageFile" id="ImageFile" type="file" />
         </div>
 
         <div class="form-group">
@@ -74,8 +68,8 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-label mt-4 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>

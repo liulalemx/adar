@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -39,7 +40,7 @@ namespace school_adar.Controllers
         // GET: Housings/Create
         public ActionResult Create()
         {
-            ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName");
+            //ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName");
             return View();
         }
 
@@ -48,16 +49,27 @@ namespace school_adar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LessorID,Location,Size,Price,Image,Features,Condition")] Housing housing)
+        public ActionResult Create([Bind(Include = "ID,LessorID,Location,Size,Price,Image,Features,Condition")] Housing housing, HttpPostedFileBase ImageFile)
         {
+            var files = Request.Files["ImageFile"];
+
+            using (var ms = new MemoryStream())
+            {
+                files.InputStream.CopyTo(ms);
+                housing.Image = ms.ToArray();
+            }
+    
+            Lessor lessor = db.Lessor.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            housing.LessorID = lessor.ID;
+           
             if (ModelState.IsValid)
             {
                 db.Housings.Add(housing);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
             }
-
-            ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName", housing.LessorID);
+            
+            //ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName", housing.LessorID);
             return View(housing);
         }
 
@@ -82,13 +94,24 @@ namespace school_adar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LessorID,Location,Size,Price,Image,Features,Condition")] Housing housing)
+        public ActionResult Edit([Bind(Include = "ID,LessorID,Location,Size,Price,Image,Features,Condition")] Housing housing, HttpPostedFileBase ImageFile)
         {
+            var files = Request.Files["ImageFile"];
+
+            using (var ms = new MemoryStream())
+            {
+                files.InputStream.CopyTo(ms);
+                housing.Image = ms.ToArray();
+            }
+            
+            Lessor lessor = db.Lessor.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            housing.LessorID = lessor.ID;
+
             if (ModelState.IsValid)
             {
                 db.Entry(housing).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("LessorHouses", "Housings", new { id = housing.LessorID });
             }
             ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName", housing.LessorID);
             return View(housing);

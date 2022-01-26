@@ -4,71 +4,92 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<style>
+    .cardShadow {
+        width: 100%;
+        min-height: 100vh;
+        overflow-y: scroll;
+        background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
-<div>
-    <h4>Housing</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Lessor.FirstName)
-        </dt>
+        .cardShadow::-webkit-scrollbar {
+            width: 0.5rem;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Lessor.FirstName)
-        </dd>
+        .cardShadow::-webkit-scrollbar-thumb {
+            background-color: #ff7676;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
+        .cardShadow::-webkit-scrollbar-track {
+            background: white;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
+    .detail {
+        width: 80%;
+        border-radius: 1rem;
+        padding: 2rem 5rem;
+        background: white;
+        position: absolute;
+        left: 10%;
+        color: black;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Size)
-        </dt>
+    .img {
+        width: 100%;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Size)
-        </dd>
+    .stats {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+    .info {
+        text-align: center;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+    .media {
+        margin-top: 5rem;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
+    .desc {
+        margin: 5rem 0rem;
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+@{
+    byte[] image = Model.Image;
+    string contentType = "image/jpeg";
+    ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Features)
-        </dt>
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.Features)
-        </dd>
+<div class="cardShadow">
+    <div class="detail animate__animated animate__zoomIn">
+        <div class="stats">
+            <div class="ratings">
+                <h3>@Model.Location</h3>
+                <p>Rating: 5</p>
+            </div>
+            <div class="info">
+                <h3>Owner</h3>
+                <p>@Model.Lessor.FirstName</p>
+            </div>
+        </div>
+        <div class="media">
+            <img class="img" src=@ViewBag.imageSrc alt="House Image" />
+        </div>
+        <div class="desc">
+            <p>Price: @Model.Price $/night &nbsp; &nbsp; Area: @Model.Size sq/ft</p>
+            <p>@Model.Features</p>
+        </div>
+        <p class="jus">
+            @Html.ActionLink("Edit", "Edit", "Housings", new { id = Model.ID }, new { @class = "btn btn-warning" })  @Html.ActionLink("Delete", "Delete","Housings", new { id = Model.ID }, new { @class = "btn btn-danger" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Condition)
-        </dd>
-
-    </dl>
+            <div class="btn btn-info" onclick="history.go(-1); return false;">Go Back</div>
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

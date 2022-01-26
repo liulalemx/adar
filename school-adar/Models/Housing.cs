@@ -17,7 +17,7 @@ namespace school_adar.Models
         public string Features { get; set; }
         public string Condition { get; set; }
 
-        [Required]
+        //[Required]
         public virtual Lessor Lessor { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
