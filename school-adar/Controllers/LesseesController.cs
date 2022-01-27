@@ -79,7 +79,7 @@ namespace school_adar.Controllers
             {
                 db.Lessee.Add(lessee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Housings");
             }
 
             return View(lessee);

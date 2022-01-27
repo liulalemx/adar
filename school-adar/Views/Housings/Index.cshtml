@@ -27,6 +27,17 @@
     .homeList {
         padding: 0rem 5rem;
     }
+        .homeList::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        .homeList::-webkit-scrollbar-thumb {
+            background-color: #00ff90;
+        }
+
+        .homeList::-webkit-scrollbar-track {
+            background: white;
+        }
 
     .h2 {
         padding: 3rem 0rem;
@@ -43,14 +54,14 @@
 
 <div class="homeList" style="overflow-x:hidden">
     <h2 class="h2">Available Accomodations</h2>
-    <div class="home">
+    <div class="home animate__animated animate__backInUp">
         @foreach (var item in Model)
         {
             byte[] image = item.Image;
             string contentType = "image/jpeg";
             ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
 
-            <div class="homeCard animate__animated animate__backInUp">
+            <div class="homeCard">
                 <a href="~/Housings/LesseeDetails/@item.ID" style="text-decoration:none">
                     <h3>@item.Location</h3>
                     <p>@item.Price $/night</p>

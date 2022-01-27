@@ -25,6 +25,7 @@ namespace school_adar.Controllers
         // GET: Housings/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.rating = getRating(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
