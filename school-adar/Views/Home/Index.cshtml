@@ -13,9 +13,15 @@
         <h1 class="cover-heading text-center animate__animated animate__bounce animate__delay-1s">Find a cozy getaway.</h1>
         <p class="lead text-center" style="color:#c0f6d8;">Adar is the best place to find affordable getaways and comfortible accomodation</p>
         <p class="lead text-center">
-            <a href="#" class="btn btn-lg btn-secondary" style="color:#20B875">Lets Go!</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/Housings/LetsGo" class="btn btn-lg btn-secondary" style="color:#20B875">Lets Go!</a>
+            }
+            else
+            {
+                <a href="" class="btn btn-lg btn-secondary" style="color:#20B875">Lets Go!</a>
+            }
         </p>
     </main>
-
-
 </div>
+

@@ -165,5 +165,19 @@ namespace school_adar.Controllers
             }
             return View(housing);
         }
+
+        public ActionResult LetsGo()
+        {
+            Lessor lessor = db.Lessor.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            Lessee lessee = db.Lessee.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            if (lessor != null)
+            {
+                return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Housings", new { id = lessee.ID});
+            }
+        }
     }
 }
