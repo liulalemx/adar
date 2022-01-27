@@ -39,8 +39,8 @@ namespace school_adar.Controllers
         // GET: Reviews/Create
         public ActionResult Create()
         {
-            ViewBag.HousingID = new SelectList(db.Housings, "ID", "Location");
-            ViewBag.LesseeID = new SelectList(db.Lessee, "ID", "FirstName");
+            //ViewBag.HousingID = new SelectList(db.Housings, "ID", "Location");
+            //ViewBag.LesseeID = new SelectList(db.Lessee, "ID", "FirstName");
             return View();
         }
 
@@ -51,6 +51,7 @@ namespace school_adar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LesseeID,HousingID,Rating,Comment")] Review review)
         {
+
             if (ModelState.IsValid)
             {
                 db.Review.Add(review);
@@ -58,8 +59,26 @@ namespace school_adar.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.HousingID = new SelectList(db.Housings, "ID", "Location", review.HousingID);
-            ViewBag.LesseeID = new SelectList(db.Lessee, "ID", "FirstName", review.LesseeID);
+            //ViewBag.HousingID = new SelectList(db.Housings, "ID", "Location", review.HousingID);
+            //ViewBag.LesseeID = new SelectList(db.Lessee, "ID", "FirstName", review.LesseeID);
+            return View(review);
+        }
+
+        public ActionResult GiveRating(int houseID, Double rating)
+        {
+            Review review = new Review();
+            Lessee lessee = db.Lessee.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            Housing housing = db.Housings.Where(tmp => tmp.ID == houseID).FirstOrDefault();
+            review.LesseeID = lessee.ID;
+            review.HousingID = houseID;
+            review.Rating = rating;
+
+            if (ModelState.IsValid)
+            {
+                db.Review.Add(review);
+                db.SaveChanges();
+                return RedirectToAction("LesseeDetails", "Housings", new { id = housing.ID });
+            }
             return View(review);
         }
 

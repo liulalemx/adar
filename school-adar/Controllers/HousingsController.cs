@@ -37,9 +37,26 @@ namespace school_adar.Controllers
             return View(housing);
         }
 
+        public Double getRating(int? id)
+        {
+            Double sum = 0;
+            Double noOfRatings = 0;
+            Double avgRating = 0;
+            List<Review> review = db.Review.Where(tmp => tmp.HousingID == id).ToList();
+            foreach (var item in review)
+            {
+                sum += item.Rating;
+                noOfRatings++;
+            }
+            avgRating = sum / noOfRatings;
+            return avgRating;
+        }
+
+
         // GET: Housings/LesseeDetails/5
         public ActionResult LesseeDetails(int? id)
         {
+            ViewBag.rating = getRating(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

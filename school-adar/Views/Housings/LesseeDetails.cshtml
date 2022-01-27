@@ -72,19 +72,19 @@
         <div class="stats">
             <div class="ratings">
                 <h3>@Model.Location</h3>
-                <p>Rating: 5</p>
+                <p>Rating: @ViewBag.rating</p>
                 <div class="btn-group me-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-primary">1</button>
-                    <button type="button" class="btn btn-outline-primary">2</button>
-                    <button type="button" class="btn btn-outline-primary">3</button>
-                    <button type="button" class="btn btn-outline-primary">4</button>
-                    <button type="button" class="btn btn-outline-primary">5</button>
+                    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("1", "GiveRating", "Reviews", new { houseID = Model.ID, rating = 1 }, new { @style="color:black; text-decoration:none; display:block; width:30px" })</button>
+                    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("2", "GiveRating", "Reviews", new { houseID = Model.ID, rating = 2 }, new { @style="color:black; text-decoration:none; display:block; width:30px" })</button>
+                    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("3", "GiveRating", "Reviews", new { houseID = Model.ID, rating = 3 }, new { @style="color:black; text-decoration:none; display:block; width:30px" })</button>
+                    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("4", "GiveRating", "Reviews", new { houseID = Model.ID, rating = 4 }, new { @style="color:black; text-decoration:none; display:block; width:30px" })</button>
+                    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("5", "GiveRating", "Reviews", new { houseID = Model.ID, rating = 5 }, new { @style="color:black; text-decoration:none; display:block; width:30px" })</button>
                 </div>
             </div>
             <div class="info">
                 <h3>Owner</h3>
                 <p>@Model.Lessor.FirstName &nbsp; @Model.Lessor.LastName </p>
-                <div style="display:flex"><p style="float:right">@Model.Lessor.PhoneNo</p> <img class="animate__animated animate__tada animate__delay-2s" src="~/Assets/phone-svgrepo-com.svg" alt="My Happy SVG" style="float:left; width:30px; height:30px"/></div>
+                <div style="display:flex"><p style="float:right">@Model.Lessor.PhoneNo</p> <img class="animate__animated animate__tada animate__delay-2s" src="~/Assets/phone-svgrepo-com.svg" alt="My Happy SVG" style="float:left; width:30px; height:30px" /></div>
             </div>
         </div>
         <div class="media">
@@ -95,7 +95,7 @@
             <p>@Model.Features</p>
         </div>
         <p class="jus">
-            @Html.ActionLink("Request","Request","", new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Request", "", "",new { @class = "btn btn-warning" })
 
             <div class="btn btn-info" onclick="history.go(-1); return false;">Go Back</div>
         </p>
