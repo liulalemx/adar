@@ -140,7 +140,7 @@ namespace school_adar.Controllers
             Housing housing = db.Housings.Find(id);
             db.Housings.Remove(housing);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("LessorHouses", "Housings", new { id = housing.LessorID });
         }
 
         protected override void Dispose(bool disposing)
