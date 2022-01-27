@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "LesseeDetails";
+}
+
+
+<style>
+    .cardShadow {
+        width: 100%;
+        min-height: 100vh;
+        overflow-y: scroll;
+        background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+        .cardShadow::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        .cardShadow::-webkit-scrollbar-thumb {
+            background-color: #00ff90;
+        }
+
+        .cardShadow::-webkit-scrollbar-track {
+            background: white;
+        }
+
+    .detail {
+        width: 80%;
+        border-radius: 1rem;
+        padding: 2rem 5rem;
+        background: white;
+        position: absolute;
+        left: 10%;
+        color: black;
+    }
+
+    .img {
+        width: 100%;
+    }
+
+    .stats {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .info {
+        text-align: center;
+    }
+
+    .media {
+        margin-top: 5rem;
+    }
+
+    .desc {
+        margin: 5rem 0rem;
+    }
+</style>
+
+@{
+    byte[] image = Model.Image;
+    string contentType = "image/jpeg";
+    ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
+
+}
+
+<div class="cardShadow">
+    <div class="detail animate__animated animate__zoomIn">
+        <div class="stats">
+            <div class="ratings">
+                <h3>@Model.Location</h3>
+                <p>Rating: 5</p>
+                <div class="btn-group me-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-outline-primary">1</button>
+                    <button type="button" class="btn btn-outline-primary">2</button>
+                    <button type="button" class="btn btn-outline-primary">3</button>
+                    <button type="button" class="btn btn-outline-primary">4</button>
+                    <button type="button" class="btn btn-outline-primary">5</button>
+                </div>
+            </div>
+            <div class="info">
+                <h3>Owner</h3>
+                <p>@Model.Lessor.FirstName &nbsp; @Model.Lessor.LastName </p>
+                <div style="display:flex"><p style="float:right">@Model.Lessor.PhoneNo</p> <img class="animate__animated animate__tada animate__delay-2s" src="~/Assets/phone-svgrepo-com.svg" alt="My Happy SVG" style="float:left; width:30px; height:30px"/></div>
+            </div>
+        </div>
+        <div class="media">
+            <img class="img" src=@ViewBag.imageSrc alt="House Image" />
+        </div>
+        <div class="desc">
+            <p>Price: @Model.Price $/night &nbsp; &nbsp; Area: @Model.Size sq/ft</p>
+            <p>@Model.Features</p>
+        </div>
+        <p class="jus">
+            @Html.ActionLink("Request","Request","", new { @class = "btn btn-warning" }) 
+
+            <div class="btn btn-info" onclick="history.go(-1); return false;">Go Back</div>
+        </p>
+    </div>
+</div>
+
+

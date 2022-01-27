@@ -53,9 +53,9 @@
             ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
 
             <div class="homeCard animate__animated animate__backInUp">
-                <a href="~/Housings/Details/@item.ID">
+                <a href="~/Housings/Details/@item.ID" style="text-decoration:none">
                     <h3>@item.Location</h3>
-                    <p>@item.Price $</p>
+                    <p>@item.Price $/night</p>
                     <img class="img" src=@ViewBag.imageSrc alt="House Image" />
                 </a>
             </div>

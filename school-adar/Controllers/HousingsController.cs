@@ -37,6 +37,21 @@ namespace school_adar.Controllers
             return View(housing);
         }
 
+        // GET: Housings/LesseeDetails/5
+        public ActionResult LesseeDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Housing housing = db.Housings.Find(id);
+            if (housing == null)
+            {
+                return HttpNotFound();
+            }
+            return View(housing);
+        }
+
         // GET: Housings/Create
         public ActionResult Create()
         {
