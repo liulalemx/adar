@@ -53,11 +53,26 @@ namespace school_adar.Controllers
             return avgRating;
         }
 
+        public Boolean CheckRequested(int? houseID)
+        {
+            Lessee lessee = db.Lessee.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            Request request = db.Request.Where(tmp => tmp.HousingID == houseID && tmp.LesseeID == lessee.ID).FirstOrDefault();
+            if (request != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
         // GET: Housings/LesseeDetails/5
         public ActionResult LesseeDetails(int? id)
         {
             ViewBag.rating = getRating(id);
+            ViewBag.request = CheckRequested(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

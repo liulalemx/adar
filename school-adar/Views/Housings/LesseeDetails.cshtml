@@ -95,8 +95,14 @@
             <p>@Model.Features</p>
         </div>
         <p class="jus">
-            @Html.ActionLink("Request", "", "",new { @class = "btn btn-warning" })
+            @if(@ViewBag.request){
+                <p>Request Sent!</p>
+            }
+            else
+            {
+                @Html.ActionLink("Request", "SendRequest", "Requests", new { houseID = Model.ID}, new { @class = "btn btn-warning" })
 
+            }
             <div class="btn btn-info" onclick="history.go(-1); return false;">Go Back</div>
         </p>
     </div>

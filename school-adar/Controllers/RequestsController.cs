@@ -15,10 +15,10 @@ namespace school_adar.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Requests
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var request = db.Request.Include(r => r.Housing).Include(r => r.Lessee);
-            return View(request.ToList());
+            List<Request> request = db.Request.Where(temp => temp.Housing.LessorID == id).ToList();
+            return View(request);
         }
 
         // GET: Requests/Details/5
@@ -121,7 +121,7 @@ namespace school_adar.Controllers
             Request request = db.Request.Find(id);
             db.Request.Remove(request);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Requests");
         }
 
         protected override void Dispose(bool disposing)
@@ -132,5 +132,22 @@ namespace school_adar.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult SendRequest(int houseID)
+        {
+            Request request = new Request();
+            Lessee lessee = db.Lessee.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            request.LesseeID = lessee.ID;
+            request.HousingID = houseID;
+            
+            if (ModelState.IsValid)
+            {
+                db.Request.Add(request);
+                db.SaveChanges();
+                return RedirectToAction("LesseeDetails", "Housings", new { id = houseID });
+            }
+            return View(request);
+        }
+       
     }
 }

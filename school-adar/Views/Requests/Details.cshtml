@@ -4,31 +4,116 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Request</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Housing.Location)
-        </dt>
+<style>
+    .cardShadow {
+        width: 100%;
+        min-height: 100vh;
+        overflow-y: scroll;
+        background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Housing.Location)
-        </dd>
+        .cardShadow::-webkit-scrollbar {
+            width: 0.5rem;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lessee.FirstName)
-        </dt>
+        .cardShadow::-webkit-scrollbar-thumb {
+            background-color: #00ff90;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.Lessee.FirstName)
-        </dd>
+        .cardShadow::-webkit-scrollbar-track {
+            background: white;
+        }
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    .detail {
+        width: 80%;
+        border-radius: 1rem;
+        padding: 2rem 5rem;
+        background: white;
+        position: absolute;
+        left: 10%;
+        color: black;
+    }
+
+    .img {
+        width: 100%;
+    }
+
+    .stats {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .info {
+        text-align: center;
+    }
+
+    .media {
+        margin-top: 5rem;
+    }
+
+    .desc {
+        margin: 5rem 0rem;
+    }
+
+    .profilePic{
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .centerr{
+        margin: auto;
+    }
+</style>
+
+@{
+    //House Image
+    byte[] image = Model.Housing.Image;
+    string contentType = "image/jpeg";
+    ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
+
+    //Lessee Image
+    byte[] imagee = Model.Lessee.Image;
+    string contentTypee = "image/jpeg";
+    ViewBag.imageSrcc = string.Format("data:{0};base64,{1}", contentTypee, Convert.ToBase64String(imagee));
+
+}
+
+<div class="cardShadow">
+    <div class="detail animate__animated animate__zoomIn">
+        <div class="info">
+            <h3>Request by</h3>
+            <div class="media profilePic centerr">
+                <img class="img" src=@ViewBag.imageSrcc alt="Lessee Image" />
+            </div>
+            <p>@Model.Lessee.FirstName &nbsp; @Model.Lessee.LastName </p>
+            <div class="center" style="top:18%; display:flex"><p style="float:right">@Model.Lessee.PhoneNo</p> <img class="animate__animated animate__tada animate__delay-2s" src="~/Assets/phone-svgrepo-com.svg" alt="My Happy SVG" style="float:left; width:30px; height:30px" /></div>
+        </div>
+        <div class="stats">
+            <div class="ratings">
+                <h3>@Model.Housing.Location</h3>
+            </div>
+        </div>
+        <div class="media">
+            <img class="img" src=@ViewBag.imageSrc alt="House Image" />
+        </div>
+        <div class="desc">
+            <p>Price: @Model.Housing.Price $/night &nbsp; &nbsp; Area: @Model.Housing.Size sq/ft</p>
+            <p>@Model.Housing.Features</p>
+        </div>
+        <p class="jus">
+            @Html.ActionLink("Reject", "Delete", new { id = Model.ID }, new { @class="btn btn-danger"})
+            <div class="btn btn-info" onclick="history.go(-1); return false;">Go Back</div>
+        </p>
+    </div>
+    </div>
+
+
+
+

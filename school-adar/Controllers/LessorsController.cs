@@ -123,5 +123,18 @@ namespace school_adar.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult getLessorID()
+        {
+            Lessor lessor = db.Lessor.Where(tmp => tmp.Email == User.Identity.Name).FirstOrDefault();
+            if (lessor != null)
+            {
+                return RedirectToAction("Index", "Requests", new { id = lessor.ID });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

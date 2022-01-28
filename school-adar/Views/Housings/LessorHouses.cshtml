@@ -26,6 +26,7 @@
     .homeList {
         padding: 0rem 5rem;
     }
+
         .homeList::-webkit-scrollbar {
             width: 0.5rem;
         }
@@ -37,6 +38,7 @@
         .homeList::-webkit-scrollbar-track {
             background: white;
         }
+
     .h2 {
         padding: 3rem 0rem;
     }
@@ -52,6 +54,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create", "Housings", new { @class = "btn btn-success", style = "margin-left:5rem" })
+    <a class="btn btn-outline-light" href="/Lessors/getLessorID" style = "margin-right:5rem; float:right">Requests</a>
 </p>
 <div class="homeList" style="overflow-x:hidden">
     <h2 class="h2">Your Accomodations</h2>
@@ -75,5 +78,5 @@
 </div>
 
 
- @*return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
-@Html.ActionLink("Edit", "Edit", new { id = item.ID, @class = "btn btn-outline-success" })*@
+@*return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
+    @Html.ActionLink("Edit", "Edit", new { id = item.ID, @class = "btn btn-outline-success" })*@
