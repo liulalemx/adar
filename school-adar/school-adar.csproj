@@ -320,6 +320,7 @@
     <Content Include="Views\Reviews\Index.cshtml" />
     <Content Include="Views\Housings\LessorHouses.cshtml" />
     <Content Include="Views\Housings\LesseeDetails.cshtml" />
+    <Content Include="Views\Housings\SearchHousing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

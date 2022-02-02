@@ -135,10 +135,11 @@
             <div class="inner">
                 <div class="navbar navbar-expand-lg navbar-dark">
                     <h3 class="masthead-brand animate__animated animate__rubberBand">Adar</h3>
-                    <form class="d-flex center">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                    @using (Html.BeginForm("SearchHousing", "Housings", FormMethod.Post, new { @class = "d-flex center", enctype = "multipart/form-data"}))
+                    {
+                            <input class="form-control me-sm-2" type="text" id="searchInput" name="searchInput" placeholder="Search" runat="server">
+                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    } 
                     <div class="container-fluid">
                         <div class="navbar-collapse collapse" style="justify-content:flex-end">@Html.Partial("_LoginPartial")</div>
                     </div>

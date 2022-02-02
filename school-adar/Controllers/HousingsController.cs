@@ -88,8 +88,7 @@ namespace school_adar.Controllers
         // GET: Housings/Create
         public ActionResult Create()
         {
-            //ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName");
-            return View();
+           return View();
         }
 
         // POST: Housings/Create
@@ -117,7 +116,6 @@ namespace school_adar.Controllers
                 return RedirectToAction("LessorHouses", "Housings", new { id = lessor.ID });
             }
             
-            //ViewBag.LessorID = new SelectList(db.Lessor, "ID", "FirstName", housing.LessorID);
             return View(housing);
         }
 
@@ -226,6 +224,13 @@ namespace school_adar.Controllers
             {
                 return RedirectToAction("Index", "Housings", new { id = lessee.ID});
             }
+        }
+        [HttpPost]
+        public ActionResult SearchHousing(string searchInput)
+        {
+            var store = searchInput;
+            List<Housing> housing = db.Housings.Where(tmp => tmp.Location == searchInput).ToList();
+            return View(housing);
         }
     }
 }

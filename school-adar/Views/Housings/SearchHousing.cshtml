@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "SearchHousing";
+}
+
+
+
+<style>
+    .homeCard {
+        min-height: 30vh;
+        max-height: 40vh;
+        max-width: 400px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border-radius: 1rem;
+        cursor: pointer;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .img {
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+    }
+
+    .homeList {
+        padding: 0rem 5rem;
+    }
+
+        .homeList::-webkit-scrollbar {
+            width: 0.5rem;
+        }
+
+        .homeList::-webkit-scrollbar-thumb {
+            background-color: #00ff90;
+        }
+
+        .homeList::-webkit-scrollbar-track {
+            background: white;
+        }
+
+    .h2 {
+        padding: 3rem 0rem;
+    }
+
+    .home {
+        min-height: 80vh;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        grid-column-gap: 3rem;
+        grid-row-gap: 5rem;
+    }
+</style>
+
+<div class="homeList" style="overflow-x:hidden">
+    <h2 class="h2">Available Accomodations</h2>
+    <div class="home">
+        @foreach (var item in Model)
+        {
+            byte[] image = item.Image;
+            string contentType = "image/jpeg";
+            ViewBag.imageSrc = string.Format("data:{0};base64,{1}", contentType, Convert.ToBase64String(image));
+
+            <div class="homeCard">
+                <a href="~/Housings/LesseeDetails/@item.ID" style="text-decoration:none">
+                    <h3>@item.Location</h3>
+                    <p>@item.Price $/night</p>
+                    <img class="img" src=@ViewBag.imageSrc alt="House Image" />
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+
+
