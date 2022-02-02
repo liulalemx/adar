@@ -54,7 +54,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create", "Housings", new { @class = "btn btn-success", style = "margin-left:5rem" })
-    <a class="btn btn-outline-light" href="/Lessors/getLessorID" style = "margin-right:5rem; float:right">Requests</a>
+    <a class="btn btn-outline-light" href="/Lessors/getLessorID" style = "margin-right:5rem; float:right">Requests @ViewBag.RequestCount</a>
 </p>
 <div class="homeList" style="overflow-x:hidden">
     <h2 class="h2">Your Accomodations</h2>

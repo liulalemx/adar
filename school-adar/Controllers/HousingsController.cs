@@ -204,7 +204,15 @@ namespace school_adar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<Housing> housing = db.Housings.Where(temp=>temp.LessorID == id).ToList();
+            List<Housing> housing = db.Housings.Where(temp=> temp.LessorID == id).ToList();
+            List<Request> request = db.Request.Where(temp => temp.Housing.LessorID == id).ToList();
+            var count = 0;
+            foreach (var item in request)
+            {
+                count++;
+            }
+            ViewBag.RequestCount = count;
+
             if (housing == null)
             {
                 return HttpNotFound();
